@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Reflection.PortableExecutable;
 using System.Text;
+using DataGuard.services.interfaces;
 
 namespace DataGuard.services.classes
 {
-    class CsvReader : IReader 
+    class CsvReader : IReader
     {
-        static string[] ReadFile(string path)
+        public string[] ReadFile(string file)
         {
-            string[] fileText = File.ReadAllLines(path);
+            string[] fileText = File.ReadAllLines(file);
 
             return fileText;
         }
