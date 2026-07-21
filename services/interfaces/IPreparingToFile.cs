@@ -4,7 +4,8 @@ using System.Text;
 
 namespace DataGuard.services.interfaces
 {
-    internal interface IPreparingToFile
+    interface IPreparingToFile
     {
+        List<string> Preparing(List<Dictionary<string, string>> sample, string predict);
     }
 }
