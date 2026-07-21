@@ -7,16 +7,15 @@ namespace DataGuard.services.classes
 {
     internal class PreparingToCsv : IPreparingToFile
     {
-        public List<string> Preparing(string[] lines, string predict, NaiveBayesModel model)
+        public List<string> Preparing(string[] lines, string predict, ModuleCreator model)
         {
             List<string> result = new List<string>();
-            List<string> features = new List<string>();
-            foreach (var key in model.Keys)
-            {
-                features.Add(key.Item2);
-            }
+            IEnumerable<string> features = model.cond.Keys
+                .Select(key => key.Item2)
+                .Distinct();
             string headerLine = string.Join(",", features);
             result.Add(headerLine);
+            return result;
         }
     }
 }
