@@ -6,5 +6,6 @@ namespace DataGuard.services.interfaces
 {
     internal interface IExport
     {
+        bool ExportToFile(string file, List<string> data);
     }
 }
