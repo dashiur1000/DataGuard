@@ -34,6 +34,7 @@ The prediction is based in the naive bayes probability classifier
 | WriteToCsv | service | in charge of the file prediction output |
 | Predict | entity | return the prediction |
 | FindPathInFile | service | find path |
+| InputSample | service | Receives inputs at the terminal and processes them for sampling |
 |  |  |  |
 
 | ModulePipeline |  |  |
