@@ -8,15 +8,16 @@ class Program
     static void Main(string[] args)
     {
         string[] strings = args;
-        ModulePipeline.FirstPipeline(strings);
+        var model = ModulePipeline.FirstPipeline(strings);
         bool FileOrInput = Node.NodePath(strings);
         if(FileOrInput)
         {
-            
+            BatchModePipeline batchModePipeline = new BatchModePipeline();
+            batchModePipeline.FilePipeline(args, model);
         }
         else
         {
-
+            InteractiveInputPipeline interactiveInputPipeline = new InteractiveInputPipeline();
         }
             
     }

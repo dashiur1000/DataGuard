@@ -8,17 +8,18 @@ namespace DataGuard.services.pipelines
 {
     class ModulePipeline
     {
-        static public ModuleCreator FirstPipeline(string[] args)
+        static public Module FirstPipeline(string[] args)
         {
             FindPathInFile pathFinder = new FindPathInFile();
             IReader reader = new CsvReader();
             IParser parser = new DataParsing();
-            Module module = new Module();
+            Module model = new Module();
 
             string TrainingPath = pathFinder.FoundPath(args[0]);
             string[] lines = reader.ReadFile(TrainingPath);
             List<Dictionary<string, string>> pars = parser.DictionaryParser(lines);
-            module.Train(pars);
+            model.Train(pars);
+            return model;
         }
     }
 }
