@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DataGuard.services.classes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DataGuard.services.interfaces
 {
-    internal interface IPreparingToFile
+    interface IPreparingToFile
     {
+        List<string> Preparing(string[] lines, string predict, ModuleCreator model);
     }
 }

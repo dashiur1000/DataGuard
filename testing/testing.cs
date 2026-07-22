@@ -39,6 +39,18 @@ namespace DataGuard.testing
 
             foreach (var x in module.Cond) { Console.WriteLine($"k: {x.Key} | v: {x.Value}"); }
 
+            //CsvReader csvReader = new CsvReader();
+            //string[] fileText =  csvReader.ReadFile("./input/Buys_Computer_Test.csv");
+
+            //foreach (string text in fileText)
+            //{
+            //    Console.WriteLine(text);
+            //}
+
+            // ============================== tested ==============================
+
+
+
         }
 
     }

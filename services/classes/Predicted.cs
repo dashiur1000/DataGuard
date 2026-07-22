@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DataGuard.services.classes
 {
-    class Predict : IPrediction
+    class Predicted : IPrediction
     {
-        static string Predict(NaiveBayesModel model, Dictionary<string, string> sample)
+        public string Predict(ModuleCreator model, Dictionary<string, string> sample)
         {
             string bestLabel = null;
             double bestScore = double.NegativeInfinity;
@@ -18,17 +18,17 @@ namespace DataGuard.services.classes
                 {
                     string feature = item.Key;
                     string value = item.Value;
-                    if (model.cond.ContainsKey((label, feature, value))
+                    if (model.cond.ContainsKey((label, feature, value)))
                     {
                         score = score * model.cond[(label, feature, value)];
                     }
                     else
                         score = score * model.unseen[(label, feature)];
-                if(score > bestScore)
-                    {
-                        bestScore = score;
-                        bestLabel = label;
-                    }
+                }
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestLabel = label;
                 }
             }
             return bestLabel;
