@@ -19,7 +19,7 @@ namespace DataGuard.services.classes
             Dictionary<string, int> priors = GetPriors(labels, inputData, targetColumn);
 
             Dictionary<(string, string, string), double> cond = new();
-            Dictionary<(string, string, string), double> unseen = new();
+            Dictionary<(string, string), double> unseen = new();
 
             foreach (string label in labels)
             {
@@ -41,12 +41,8 @@ namespace DataGuard.services.classes
                         
                         cond[(label, feature, value)] = (double)(match + 1) / (Rows.Count() + distinct);
                     }
+                    unseen[(label, feature)] = 1.0 / (Rows.Count() + distinct);
                 }
-            }
-
-            foreach (var c in cond)
-            {
-                Console.WriteLine($"k: {c.Key} : v: {c.Value}");
             }
 
             return new Dictionary<(string, string, string), double>();
