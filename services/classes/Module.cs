@@ -7,21 +7,27 @@ namespace DataGuard.services.classes
 {
     public class Module
     {
-        public Dictionary<(string, string, string), double> CalculateMoudle(List<Dictionary<string, string>> inputData, string targetColumn)
+        public List<string> Labels { get; set; } = new();
+        public Dictionary<string, int> Priors { get; set; } = new();
+        public Dictionary<(string, string, string), double> Cond { get; set; } = new();
+        public Dictionary<(string, string), double> Unseen { get; set; } = new();
+
+
+
+
+
+        public Dictionary<(string, string, string), double> Train(List<Dictionary<string, string>> inputData, string targetColumn)
         {
             int numberOfRows = inputData.Count;
 
-            List<string> labels =
+            Labels =
                 inputData.Select(row => row[targetColumn])
                 .Distinct()
                 .ToList();
 
-            Dictionary<string, int> priors = GetPriors(labels, inputData, targetColumn);
+            Priors = GetPriors(Labels, inputData, targetColumn);
 
-            Dictionary<(string, string, string), double> cond = new();
-            Dictionary<(string, string), double> unseen = new();
-
-            foreach (string label in labels)
+            foreach (string label in Labels)
             {
                 var Rows = inputData.Where(dict => dict[targetColumn] == label);
 
@@ -36,12 +42,11 @@ namespace DataGuard.services.classes
                     
                     foreach (string value in values)
                     {
-                        Console.WriteLine(value);
                         double match = Rows.Count(row => row[feature] == value);
                         
-                        cond[(label, feature, value)] = (double)(match + 1) / (Rows.Count() + distinct);
+                        Cond[(label, feature, value)] = (double)(match + 1) / (Rows.Count() + distinct);
                     }
-                    unseen[(label, feature)] = 1.0 / (Rows.Count() + distinct);
+                    Unseen[(label, feature)] = 1.0 / (Rows.Count() + distinct);
                 }
             }
 
