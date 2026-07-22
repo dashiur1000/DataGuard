@@ -16,7 +16,7 @@ namespace DataGuard.services.classes
 
 
 
-        public Dictionary<(string, string, string), double> Train(List<Dictionary<string, string>> inputData, string targetColumn)
+        public void Train(List<Dictionary<string, string>> inputData, string targetColumn)
         {
             int numberOfRows = inputData.Count;
 
@@ -50,7 +50,6 @@ namespace DataGuard.services.classes
                 }
             }
 
-            return new Dictionary<(string, string, string), double>();
         }
 
 
@@ -71,11 +70,6 @@ namespace DataGuard.services.classes
             }
 
             return priors;
-        }
-
-        void GetCond()
-        {
-
         }
     }
 }
