@@ -6,7 +6,7 @@ namespace DataGuard.services.classes
 {
     class InputSample
     {
-        public Dictionary<string, string> input(Dictionary<(string, string, string), double> model)
+        public Dictionary<string, string> input(Module module)
         {
             List<string> features = new List<string>();
             foreach (var key in model.Keys)
