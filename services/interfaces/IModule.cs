@@ -1,3 +1,4 @@
+using DataGuard.services.classes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -5,5 +6,5 @@ using System.Text;
 namespace DataGuard.services.interfaces;
 interface IModule
 {
-    module Train(List<Dictionary<string, string>> rows, string targetColumn);
+    ModuleCreator Train(List<Dictionary<string, string>> rows, string targetColumn);
 }
