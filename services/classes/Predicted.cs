@@ -7,7 +7,7 @@ namespace DataGuard.services.classes
 {
     class Predicted : IPrediction
     {
-        public string Predict(ModuleCreator model, Dictionary<string, string> sample)
+        public string Predict(Module model, Dictionary<string, string> sample)
         {
             string bestLabel = null;
             double bestScore = double.NegativeInfinity;

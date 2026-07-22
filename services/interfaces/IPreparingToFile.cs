@@ -7,6 +7,6 @@ namespace DataGuard.services.interfaces
 {
     interface IPreparingToFile
     {
-        List<string> Preparing(string[] lines, string predict, ModuleCreator model);
+        string Preparing(Module model);
     }
 }

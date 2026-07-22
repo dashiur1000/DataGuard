@@ -7,15 +7,15 @@ namespace DataGuard.services.classes
 {
     internal class PreparingToCsv : IPreparingToFile
     {
-        public List<string> Preparing(string[] lines, string predict, ModuleCreator model)
+        public string Preparing(Module model)
         {
-            List<string> result = new List<string>();
+            //List<string> result = new List<string>();
             IEnumerable<string> features = model.cond.Keys
                 .Select(key => key.Item2)
                 .Distinct();
-            string headerLine = string.Join(",", features);
-            result.Add(headerLine);
-            return result;
+            string firstLine = string.Join(",", features);
+            //result.Add(headerLine);
+            return firstLine;
         }
     }
 }

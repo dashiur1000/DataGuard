@@ -13,12 +13,12 @@ namespace DataGuard.services.pipelines
             FindPathInFile pathFinder = new FindPathInFile();
             IReader reader = new CsvReader();
             IParser parser = new DataParsing();
-            IModule module = new ModuleCreator();
+            Module module = new Module();
 
             string TrainingPath = pathFinder.FoundPath(args[0]);
             string[] lines = reader.ReadFile(TrainingPath);
-            List<Dictionary<string, string>> Model = parser.DictionaryParser(lines);
-            return Model;
+            List<Dictionary<string, string>> pars = parser.DictionaryParser(lines);
+            module.Train(pars);
         }
     }
 }
