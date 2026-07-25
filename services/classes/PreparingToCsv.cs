@@ -10,7 +10,7 @@ namespace DataGuard.services.classes
         public string Preparing(Module model)
         {
             //List<string> result = new List<string>();
-            IEnumerable<string> features = model.cond.Keys
+            IEnumerable<string> features = model.Cond.Keys
                 .Select(key => key.Item2)
                 .Distinct();
             string firstLine = string.Join(",", features);

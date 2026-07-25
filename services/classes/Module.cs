@@ -32,7 +32,7 @@ namespace DataGuard.services.classes
                 var Rows = inputData.Where(dict => dict[targetColumn] == label);
 
 
-                List<string> features = Rows.ToList()[0].Keys.ToList(); // gets the columns names
+                List<string> features = inputData[0].Keys.ToList(); // gets the columns names
                 foreach (var feature in features)
                 {
                     if (feature == targetColumn) { continue; } // skips the target column

@@ -18,6 +18,7 @@ class Program
         else
         {
             InteractiveInputPipeline interactiveInputPipeline = new InteractiveInputPipeline();
+            interactiveInputPipeline.InputPipeline(args, model);
         }
             
     }

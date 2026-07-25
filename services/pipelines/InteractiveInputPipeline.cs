@@ -10,8 +10,20 @@ namespace DataGuard.services.pipelines
     {
         public bool InputPipeline(string[] args, Module model)
         {
+            IPrediction prediction = new Predicted();
             InputSample inputSample = new InputSample();
-            inputSample.input()
+            while (true)
+            {
+                Dictionary<string, string>? sample = inputSample.input(model);
+                if(sample == null)
+                {
+                    break;
+                }
+                string predictResult = prediction.Predict(model, sample);
+                Console.WriteLine($"Prediction: {predictResult}");
+            }
+            
+            return true;
         }
 
     }

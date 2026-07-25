@@ -24,18 +24,32 @@ namespace DataGuard.services.pipelines
 
             string SamplePath = pathFinder.FoundPath(args[1]);
             string[] lines = reader.ReadFile(SamplePath);
-            List<Dictionary<string, string>>  pars = parser.DictionaryParser(lines);
-            foreach (Dictionary<string,string> par in pars)
+            List<Dictionary<string, string>> pars = parser.DictionaryParser(lines);
+            string firstLine = FormatConverter.Preparing(model);
+            string[] headers = firstLine.Split(',');
+
+            string originalHeader = lines[0];
+
+            foreach (Dictionary<string, string> par in pars)
             {
                 string Predict = prediction.Predict(model, par);
-                lineCount ++;
-                Console.WriteLine($"row {lineCount}: {lines[lineCount]} -> {Predict}");
-                PerfectLines.Add(lines[lineCount]);
-                PerfectLines.Add(",");
-                PerfectLines.Add(Predict);
+                lineCount++;
+
+                List<string> orderedValues = new List<string>();
+                foreach (var header in headers)
+                {
+                    if (par.ContainsKey(header))
+                    {
+                        orderedValues.Add(par[header]);
+                    }
+                }
+
+                string featuresJoined = string.Join(",", orderedValues);
+                Console.WriteLine($"row {lineCount}: {featuresJoined} -> {Predict}");
+                PerfectLines.Add($"{featuresJoined},{Predict}");
             }
-            string firstLine = FormatConverter.Preparing(model);
-            PerfectLines.Insert(0, firstLine);
+
+            PerfectLines.Insert(0, originalHeader);
             writeToCsv.Write(PerfectLines.ToArray(), OutputPath);
             return true;
         }

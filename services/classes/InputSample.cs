@@ -1,29 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace DataGuard.services.classes
 {
     class InputSample
     {
-        public Dictionary<string, string> input(Module module)
+        public Dictionary<string, string> input(Module model)
         {
-            List<string> features = new List<string>();
-            foreach (var key in model.Keys)
-            {
-                features.Add(key.Item2);
-            }
-            List<string> inputs = new List<string>();
+            List<string> features = model.Cond.Keys
+                .Select(key => key.Item2)
+                .Distinct()
+                .ToList();
+
             Dictionary<string, string> sample = new Dictionary<string, string>();
+            bool isFirst = true;
+
             foreach (string feature in features)
             {
                 Console.Write($"{feature}: ");
                 var value = Console.ReadLine();
-                if(value == string.Empty)
+                if (isFirst && string.IsNullOrWhiteSpace(value))
                 {
-                    Environment.Exit(0);
+                    return null;
                 }
-                sample.Add(feature, value);
+                sample[feature] = value ?? string.Empty;
+                isFirst = false;
             }
             return sample;
         }

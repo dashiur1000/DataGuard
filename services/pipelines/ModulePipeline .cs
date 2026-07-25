@@ -17,8 +17,10 @@ namespace DataGuard.services.pipelines
 
             string TrainingPath = pathFinder.FoundPath(args[0]);
             string[] lines = reader.ReadFile(TrainingPath);
-            List<Dictionary<string, string>> pars = parser.DictionaryParser(lines);
-            model.Train(pars);
+            string[] parts = lines[0].Split(",");
+            string targetColumn = parts[^1];
+            List < Dictionary<string, string>> pars = parser.DictionaryParser(lines);
+            model.Train(pars, targetColumn);
             return model;
         }
     }
