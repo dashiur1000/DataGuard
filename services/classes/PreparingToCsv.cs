@@ -1,11 +1,21 @@
-﻿using System;
+﻿using DataGuard.services.interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DataGuard.services.classes
 {
-    internal class PreparingToCsv
+    internal class PreparingToCsv : IPreparingToFile
     {
-        List<string> Write(List<Dictionary<string, string>> sample, string predict);
+        public string Preparing(Module model)
+        {
+            //List<string> result = new List<string>();
+            IEnumerable<string> features = model.Cond.Keys
+                .Select(key => key.Item2)
+                .Distinct();
+            string firstLine = string.Join(",", features);
+            //result.Add(headerLine);
+            return firstLine;
+        }
     }
 }
